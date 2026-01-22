@@ -20,19 +20,52 @@ function App() {
   const [animatingCells, setAnimatingCells] = useState([]);
   const [history, setHistory] = useState([]); // History stack for undo
 
-  // Check win condition
+  // Check win condition (4 in a row)
   const checkWin = useCallback((boardState, symbol) => {
-    // Check rows
+    // Check rows (4 consecutive)
     for (let i = 0; i < 5; i++) {
-      if (boardState[i].every(cell => cell === symbol)) return true;
+      for (let j = 0; j <= 1; j++) {
+        if (boardState[i][j] === symbol && 
+            boardState[i][j+1] === symbol && 
+            boardState[i][j+2] === symbol && 
+            boardState[i][j+3] === symbol) {
+          return true;
+        }
+      }
     }
-    // Check columns
+    // Check columns (4 consecutive)
     for (let j = 0; j < 5; j++) {
-      if (boardState.every(row => row[j] === symbol)) return true;
+      for (let i = 0; i <= 1; i++) {
+        if (boardState[i][j] === symbol && 
+            boardState[i+1][j] === symbol && 
+            boardState[i+2][j] === symbol && 
+            boardState[i+3][j] === symbol) {
+          return true;
+        }
+      }
     }
-    // Check diagonals
-    if (boardState.every((row, i) => row[i] === symbol)) return true;
-    if (boardState.every((row, i) => row[4 - i] === symbol)) return true;
+    // Check main diagonal (4 consecutive)
+    for (let i = 0; i <= 1; i++) {
+      for (let j = 0; j <= 1; j++) {
+        if (boardState[i][j] === symbol && 
+            boardState[i+1][j+1] === symbol && 
+            boardState[i+2][j+2] === symbol && 
+            boardState[i+3][j+3] === symbol) {
+          return true;
+        }
+      }
+    }
+    // Check anti-diagonal (4 consecutive)
+    for (let i = 0; i <= 1; i++) {
+      for (let j = 3; j <= 4; j++) {
+        if (boardState[i][j] === symbol && 
+            boardState[i+1][j-1] === symbol && 
+            boardState[i+2][j-2] === symbol && 
+            boardState[i+3][j-3] === symbol) {
+          return true;
+        }
+      }
+    }
     return false;
   }, []);
 
@@ -401,7 +434,7 @@ function App() {
                 <li>📝 Trả lời câu hỏi để chiếm ô</li>
                 <li>✓ Đúng: Ghi dấu của đội mình</li>
                 <li>✗ Sai: Đối phương được ghi dấu</li>
-                <li>🏆 Thắng: 5 ô liên tiếp hoặc nhiều ô hơn khi hết bàn</li>
+                <li>🏆 Thắng: 4 ô liên tiếp hoặc nhiều ô hơn khi hết bàn</li>
               </ul>
             </div>
             <button className="btn btn-start" onClick={startGame}>
