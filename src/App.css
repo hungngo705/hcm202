@@ -131,26 +131,24 @@ body {
 .vietnam-flag {
   width: 120px;
   height: 80px;
-  background: #da251d;
-  border-radius: 4px;
+  background: linear-gradient(180deg, #da251d 0%, #c8102e 100%);
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 15px;
   box-shadow: 
     0 4px 15px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
     0 0 30px rgba(218, 37, 29, 0.4);
   position: relative;
+  border: 2px solid rgba(255, 215, 0, 0.3);
   animation: flagWave 3s ease-in-out infinite;
 }
 
 .flag-star {
-  font-size: 2.8rem;
+  font-size: 3rem;
   color: #ffde00;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   text-shadow: 
     0 0 10px rgba(255, 222, 0, 0.8),
     0 0 20px rgba(255, 222, 0, 0.5),
